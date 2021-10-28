@@ -1,3 +1,4 @@
 # TODO
 
-> This repository is used to record the [TODO](https://github.com/yuler/todo/issues) list
+> Record TODO list via [issues](https://github.com/yuler/todo/issues) and manage with [`gh todo`](https://github.com/yuler/gh-todo)
+
