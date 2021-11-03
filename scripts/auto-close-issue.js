@@ -1,13 +1,13 @@
 import {Octokit} from 'octokit'
+import {sub, format} from 'date-fns'
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN
 
-// Issue title
-const now = new Date()
-const yyyy = now.getFullYear().toString()
-const mm = (now.getMonth() + 1).toString().padStart(2, 0)
-const dd = now.getDay().toString().padStart(2, 0)
-const issueTitle = `${yyyy}-${mm}-${dd}`
+// Issue title for yesterday
+const yesterday = sub(new Date(), {days: 1})
+const issueTitle = format(yesterday, 'yyyy-MM-dd')
+
+console.log(`Issue title: ${issueTitle}`)
 
 // Query today issue
 const octokit = new Octokit({auth: GITHUB_TOKEN, timeZone: 'Asia/Shanghai'})
