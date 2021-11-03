@@ -1,0 +1,10 @@
+{
+	"license": "MIT",
+	"type": "module",
+	"scripts": {
+		"ci:auto-close-issue": "node scripts/auto-close-issue.js"
+	},
+	"dependencies": {
+		"octokit": "^1.7.0"
+	}
+}

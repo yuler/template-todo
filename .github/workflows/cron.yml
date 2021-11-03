@@ -1,0 +1,26 @@
+name: Cron
+
+on:
+  schedule:
+    - cron: '30 15 * * *' # timezone +8 hours
+
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: szenius/set-timezone@v1.0
+        with:
+          timezoneLinux: 'Asia/Shanghai'
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: v16.x
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 6
+      - name: Run auto-close-issue
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pnpm install
+          pnpm run ci:auto-close-issue
