@@ -2,7 +2,7 @@ name: Cron
 
 on:
   schedule:
-    - cron: '00 16 * * *' # timezone +8 hours
+    - cron: '20 * * * *' # timezone +8 hours
 
 jobs:
   cron:
@@ -20,7 +20,8 @@ jobs:
           version: 6
       - name: Run auto-close-issue
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPO_OWNER: ${{ github.repository_owner }}
         run: |
           pnpm install
           pnpm run ci:auto-close-issue

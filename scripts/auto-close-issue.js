@@ -1,7 +1,7 @@
 import {Octokit} from 'octokit'
 import {sub, format} from 'date-fns'
 
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN
+const {GITHUB_TOKEN, GITHUB_REPO_OWNER} = process.env
 
 // Issue title for yesterday
 const yesterday = sub(new Date(), {days: 1})
@@ -11,13 +11,11 @@ console.log(`Issue title: ${issueTitle}`)
 
 // Query today issue
 const octokit = new Octokit({auth: GITHUB_TOKEN, timeZone: 'Asia/Shanghai'})
-const {
-	data: {login: owner},
-} = await octokit.rest.users.getAuthenticated()
+
 const {
 	data: {items},
 } = await octokit.rest.search.issuesAndPullRequests({
-	q: `${issueTitle} repo:${owner}/todo`,
+	q: `${issueTitle} repo:${GITHUB_REPO_OWNER}/todo`,
 })
 
 // Empty
@@ -35,7 +33,7 @@ if (!done) {
 	process.exit(0)
 }
 await octokit.rest.issues.update({
-	owner,
+	owner: GITHUB_REPO_OWNER,
 	repo: 'todo',
 	issue_number: items[0].number,
 	state: 'closed',
