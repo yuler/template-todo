@@ -23,7 +23,7 @@ const {
 // Empty
 if (items.length === 0) {
 	console.log('Empty!')
-	return
+	process.exit(0)
 }
 
 const body = items[0].body
@@ -32,7 +32,7 @@ const tasks = lines.filter(line => /-\s+\[(x| )\]/.test(line))
 const done = tasks.every(task => /-\s+\[x\]/.test(task))
 if (!done) {
 	console.log('Today todo uncomplete!')
-	return
+	process.exit(0)
 }
 await octokit.rest.issues.update({
 	owner,
