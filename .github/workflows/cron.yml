@@ -2,7 +2,7 @@ name: Cron
 
 on:
   schedule:
-    - cron: '20 * * * *' # timezone +8 hours
+    - cron: '00 16 * * *' # timezone +8 hours
 
 jobs:
   cron:
