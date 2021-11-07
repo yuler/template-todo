@@ -25,9 +25,10 @@ if (items.length === 0) {
 }
 
 const body = items[0].body
-const lines = body.split(/\r\n?/)
+const lines = body.split(/\r?\n/)
 const tasks = lines.filter(line => /-\s+\[(x| )\]/.test(line))
 const done = tasks.every(task => /-\s+\[x\]/.test(task))
+
 if (!done) {
 	console.log('Today todo uncomplete!')
 	process.exit(0)
